@@ -6,4 +6,9 @@ pool:
 
 steps:
 - script: |
+    pip install azure-keyvault-secrets azure-identity
+  displayName: 'Install Python packages'
+
+- script: |
     python untitled8.py
+  displayName: 'Run Python script'
