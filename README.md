@@ -4,13 +4,7 @@
 This project aims to develop an AI-powered forecasting model for Ontario electricity demand using OpenAI's GPT-3 language model. The model will be able to predict future electricity demand based on historical data and other relevant factors.
 
 ## Technologies Used
-Python
-OpenAI/GPT-3
-Pandas
-Scikit-Learn
-Requests
-Flask
-HTML/CSS
+Python, OpenAI/GPT-3, Pandas, Scikit-Learn, Requests, Flask, HTML/CSS
 
 ## Setup
 
