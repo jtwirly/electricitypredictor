@@ -20,7 +20,6 @@ get_ipython().system('pip install azureml-sdk[automl,notebooks,explain,contrib] 
 # In[3]:
 
 
-pip install azure-keyvault-secrets azure-identity
 
 
 # In[4]:
