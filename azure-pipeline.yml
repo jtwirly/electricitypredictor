@@ -7,6 +7,11 @@ pool:
 steps:
 - script: |
     pip install azure-keyvault-secrets azure-identity
+    pip install openai
+    pip install pandas
+    pip install requests
+    pip install azureml-sdk[automl,notebooks,explain,contrib] openai_secret_manager
+    pip install --upgrade azureml-sdk
   displayName: 'Install Python packages'
 
 - script: |
