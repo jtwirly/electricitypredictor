@@ -1,10 +1,11 @@
 # Define a function that evaluates the performance of the GPT-3 model by comparing its predictions to the actual historical data for a given time period. This function should take as input the preprocessed historical data, the start and end times for the evaluation period, and the model engine to use.
 
+import os 
 import pandas as pd
 import openai
 
 # Set up OpenAI API key
-openai.api_key = openai.api_key
+openai.api_key = os.environ["OPENAI_API_KEY"]
 
 def evaluate_model(data, start_time, end_time, model_engine="text-davinci-002"):
     print("Starting model evaluation...")

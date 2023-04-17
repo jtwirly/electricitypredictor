@@ -2,6 +2,11 @@
 
 import requests
 import json 
+import openai
+import os
+
+#initialize OpenAI API key
+openai.api_key = os.environ["OPENAI_API_KEY"]
 
 def generate_output_sequence(input_sequence, model_engine="text-davinci-002"):
     print("Generating output sequence...")
@@ -16,10 +21,6 @@ def generate_output_sequence(input_sequence, model_engine="text-davinci-002"):
         "n": 1,
         "stop": "\n"
     }
-
-
-    #initialize OpenAI API key
-    openai.api_key = openai.api_key
   
     #print("data:", data)
     #return data["choices"][0]["text"].strip()

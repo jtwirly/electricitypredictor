@@ -3,6 +3,7 @@
 from azure.identity import DefaultAzureCredential
 from azure.keyvault.secrets import SecretClient
 import openai
+import os
 
 credential = DefaultAzureCredential()
 
@@ -10,6 +11,9 @@ secret_client = SecretClient(vault_url="https://keyvault1555.vault.azure.net/", 
 secret = secret_client.get_secret("openai")
 
 openai.api_key = secret.value
+
+#initialize OpenAI API key
+openai.api_key = os.environ["OPENAI_API_KEY"]
 
 from azureml.core import Workspace, Dataset
 import pandas as pd

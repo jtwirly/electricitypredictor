@@ -1,7 +1,8 @@
 import openai
+import os
 
 # Set up OpenAI API key
-openai.api_key = openai.api_key
+openai.api_key = os.environ["OPENAI_API_KEY"]
 
 # Get user input
 temperature = input("Enter the current temperature (in °F): ")
