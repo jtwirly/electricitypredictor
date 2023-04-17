@@ -14,7 +14,7 @@ Clone the repository
 
 Install the required dependencies by running pip install -r requirements.txt in your command prompt
 
-Run the Flask app by executing python app.py in your command prompt
+Run the Flask app by executing python webapp.py in your command prompt
 
 Access the app on your web browser at http://localhost:5000
 
