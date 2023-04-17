@@ -7,7 +7,7 @@
 # https://docs.microsoft.com/en-us/azure/machine-learning/how-to-use-environments
 
 # Environment definition
-environments:
+environment:
   - name: gpt3-environment
     python: 
       interpreterPath: python
