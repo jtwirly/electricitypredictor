@@ -1,5 +1,16 @@
 # Azure Machine Learning pipeline YAML file
 
+# Steps 
+steps:
+- script: |
+    pip install azure-keyvault-secrets azure-identity
+    pip install openai
+    pip install pandas
+    pip install requests
+    pip install azureml-sdk[automl,notebooks,explain,contrib] openai_secret_manager
+    pip install --upgrade azureml-sdk
+  displayName: 'Install Python packages'
+
 # Environment section
 # Defines the environment for the pipeline
 # This environment includes packages required for the pipeline steps
@@ -14,36 +25,36 @@ environment: azureml:AzureML-sklearn-1.0-ubuntu20.04-py38-cpu:1
 # For more information on pipeline definitions, see:
 # https://docs.microsoft.com/en-us/azure/machine-learning/how-to-create-machine-learning-pipelines
 
-# Pipeline definition
-name: gpt3-pipeline
-steps:
-  # Step 1: Load and preprocess data
-  - name: preprocess-data
-    script: preprocess_data.py
-    inputs:
-      dataset1: ontario_electricity_demand
-    outputs:
-      preprocessed_data: preprocessed_data
+  # Pipeline definition
+  name: gpt3-pipeline
+  steps:
+    # Step 1: Load and preprocess data
+    - name: preprocess-data
+      script: preprocess_data.py
+      inputs:
+        dataset1: ontario_electricity_demand
+      outputs:
+        preprocessed_data: preprocessed_data
 
-  # Step 2: Generate input sequences
-  - name: generate-input-sequences
-    script: generate_input_sequences.py
-    inputs:
-      preprocessed_data: preprocessed_data
-    outputs:
-      input_sequences: input_sequences
+    # Step 2: Generate input sequences
+    - name: generate-input-sequences
+      script: generate_input_sequences.py
+      inputs:
+        preprocessed_data: preprocessed_data
+      outputs:
+        input_sequences: input_sequences
 
-  # Step 3: Generate output sequences
-  - name: webapp
-    script: webapp.py
-    inputs:
-      input_sequences: input_sequences
-    outputs:
-      output_sequences: output_sequences
+    # Step 3: Generate output sequences
+    - name: webapp
+      script: webapp.py
+      inputs:
+        input_sequences: input_sequences
+      outputs:
+        output_sequences: output_sequences
 
-  # Step 4: Evaluate model performance
-  - name: evaluate-model
-    script: evaluate_model.py
-    inputs:
-      preprocessed_data: preprocessed_data
-      output_sequences: output_sequences
+    # Step 4: Evaluate model performance
+    - name: evaluate-model
+      script: evaluate_model.py
+      inputs:
+        preprocessed_data: preprocessed_data
+        output_sequences: output_sequences
