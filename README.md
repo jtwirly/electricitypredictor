@@ -11,8 +11,11 @@ Python, OpenAI/GPT-3, Pandas, Scikit-Learn, Requests, Flask, HTML/CSS
 To run this project, follow these steps:
 
 Clone the repository
+
 Install the required dependencies by running pip install -r requirements.txt in your command prompt
+
 Run the Flask app by executing python app.py in your command prompt
+
 Access the app on your web browser at http://localhost:5000
 
 ## Contributors
