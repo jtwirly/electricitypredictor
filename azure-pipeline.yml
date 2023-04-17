@@ -63,8 +63,8 @@ steps:
       name: gpt3-environment
 
   # Step 3: Generate output sequences
-  - name: generate-output-sequences
-    script: generate_output_sequences.py
+  - name: webapp
+    script: webapp.py
     inputs:
       input_sequences: input_sequences
     outputs:
