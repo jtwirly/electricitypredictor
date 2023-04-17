@@ -1,0 +1,7 @@
+azure-keyvault-secrets
+azure-identity
+openai
+pandas
+requests
+azureml-sdk[automl,notebooks,explain,contrib]
+openai_secret_manager
