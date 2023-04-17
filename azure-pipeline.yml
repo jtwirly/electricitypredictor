@@ -1,19 +1,88 @@
-trigger:
-- main
+# Azure Machine Learning pipeline YAML file
 
-pool:
-  vmImage: 'ubuntu-latest'
+# Environment section
+# Defines the environment for the pipeline
+# This environment includes packages required for the pipeline steps
+# For more information on environment definitions, see:
+# https://docs.microsoft.com/en-us/azure/machine-learning/how-to-use-environments
 
+# Environment name
+name: gpt3-environment
+
+# Environment definition
+environment:
+  name: gpt3-environment
+  python: 
+    interpreterPath: python
+    userManagedDependencies: true
+    condaDependencies:
+      channels:
+        - defaults
+      dependencies:
+        - pip
+        - pandas
+        - scikit-learn
+        - requests
+        - openai_secret_manager
+        - openai
+
+# Pipeline section
+# Defines the steps for the pipeline
+# For more information on pipeline definitions, see:
+# https://docs.microsoft.com/en-us/azure/machine-learning/how-to-create-machine-learning-pipelines
+
+# Pipeline name
+name: gpt3-pipeline
+
+# Pipeline definition
 steps:
-- script: |
-    pip install azure-keyvault-secrets azure-identity
-    pip install openai
-    pip install pandas
-    pip install requests
-    pip install azureml-sdk[automl,notebooks,explain,contrib] openai_secret_manager
-    pip install --upgrade azureml-sdk
-  displayName: 'Install Python packages'
+  # Step 1: Load and preprocess data
+  - name: preprocess-data
+    script: preprocess_data.py
+    inputs:
+      dataset1: ontario_electricity_demand
+    outputs:
+      preprocessed_data: preprocessed_data
+    # Reference the environment defined above
+    # This step requires pandas and scikit-learn packages
+    # so the environment is specified here
+    environment:
+      name: gpt3-environment
 
-- script: |
-    python untitled8.py
-  displayName: 'Run Python script'
+  # Step 2: Generate input sequences
+  - name: generate-input-sequences
+    script: generate_input_sequences.py
+    inputs:
+      preprocessed_data: preprocessed_data
+    outputs:
+      input_sequences: input_sequences
+    # Reference the environment defined above
+    # This step requires the openai package
+    # so the environment is specified here
+    environment:
+      name: gpt3-environment
+
+  # Step 3: Generate output sequences
+  - name: generate-output-sequences
+    script: generate_output_sequences.py
+    inputs:
+      input_sequences: input_sequences
+    outputs:
+      output_sequences: output_sequences
+    # Reference the environment defined above
+    # This step requires the openai package
+    # so the environment is specified here
+    environment:
+      name: gpt3-environment
+
+  # Step 4: Evaluate model performance
+  - name: evaluate-model
+    script: evaluate_model.py
+    inputs:
+      preprocessed_data: preprocessed_data
+      output_sequences: output_sequences
+    # Reference the environment defined above
+    # This step requires pandas and scikit-learn packages
+    # so the environment is specified here
+    environment:
+      name: gpt3-environment
