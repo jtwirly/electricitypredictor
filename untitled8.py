@@ -6,32 +6,16 @@
 # In[1]:
 
 
-get_ipython().system('pip install openai')
-get_ipython().system('pip install requests')
-get_ipython().system('pip install json')
-
-
 # In[2]:
-
-
-get_ipython().system('pip install azureml-sdk[automl,notebooks,explain,contrib] openai_secret_manager')
 
 
 # In[3]:
 
 
-
-
 # In[4]:
 
 
-get_ipython().system('pip install --upgrade azureml-sdk')
-
-
 # In[5]:
-
-
-pip install openai
 
 
 # In[6]:
