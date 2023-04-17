@@ -7,21 +7,7 @@
 # https://docs.microsoft.com/en-us/azure/machine-learning/how-to-use-environments
 
 # Environment definition
-environments:
-  - name: gpt3-environment
-    python: 
-      interpreterPath: python
-      userManagedDependencies: true
-      condaDependencies:
-        channels:
-          - defaults
-        dependencies:
-          - pip
-          - pandas
-          - scikit-learn
-          - requests
-          - openai_secret_manager
-          - openai
+environment: azureml:AzureML-sklearn-1.0-ubuntu20.04-py38-cpu:1
 
 # Pipeline section
 # Defines the steps for the pipeline
@@ -38,10 +24,6 @@ steps:
       dataset1: ontario_electricity_demand
     outputs:
       preprocessed_data: preprocessed_data
-    # Reference the environment defined above
-    # This step requires pandas and scikit-learn packages
-    # so the environment is specified here
-    environment: gpt3-environment
 
   # Step 2: Generate input sequences
   - name: generate-input-sequences
@@ -50,10 +32,6 @@ steps:
       preprocessed_data: preprocessed_data
     outputs:
       input_sequences: input_sequences
-    # Reference the environment defined above
-    # This step requires the openai package
-    # so the environment is specified here
-    environment: gpt3-environment
 
   # Step 3: Generate output sequences
   - name: webapp
@@ -62,10 +40,6 @@ steps:
       input_sequences: input_sequences
     outputs:
       output_sequences: output_sequences
-    # Reference the environment defined above
-    # This step requires the openai package
-    # so the environment is specified here
-    environment: gpt3-environment
 
   # Step 4: Evaluate model performance
   - name: evaluate-model
@@ -73,7 +47,3 @@ steps:
     inputs:
       preprocessed_data: preprocessed_data
       output_sequences: output_sequences
-    # Reference the environment defined above
-    # This step requires pandas and scikit-learn packages
-    # so the environment is specified here
-    environment: gpt3-environment
