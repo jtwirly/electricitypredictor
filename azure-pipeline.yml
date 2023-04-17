@@ -7,31 +7,29 @@
 # https://docs.microsoft.com/en-us/azure/machine-learning/how-to-use-environments
 
 # Environment definition
-environment:
-  name: gpt3-environment
-  python: 
-    interpreterPath: python
-    userManagedDependencies: true
-    condaDependencies:
-      channels:
-        - defaults
-      dependencies:
-        - pip
-        - pandas
-        - scikit-learn
-        - requests
-        - openai_secret_manager
-        - openai
+environments:
+  - name: gpt3-environment
+    python: 
+      interpreterPath: python
+      userManagedDependencies: true
+      condaDependencies:
+        channels:
+          - defaults
+        dependencies:
+          - pip
+          - pandas
+          - scikit-learn
+          - requests
+          - openai_secret_manager
+          - openai
 
 # Pipeline section
 # Defines the steps for the pipeline
 # For more information on pipeline definitions, see:
 # https://docs.microsoft.com/en-us/azure/machine-learning/how-to-create-machine-learning-pipelines
 
-# Pipeline name
-name: gpt3-pipeline
-
 # Pipeline definition
+name: gpt3-pipeline
 steps:
   # Step 1: Load and preprocess data
   - name: preprocess-data
@@ -43,8 +41,7 @@ steps:
     # Reference the environment defined above
     # This step requires pandas and scikit-learn packages
     # so the environment is specified here
-    environment:
-      name: gpt3-environment
+    environment: gpt3-environment
 
   # Step 2: Generate input sequences
   - name: generate-input-sequences
@@ -56,8 +53,7 @@ steps:
     # Reference the environment defined above
     # This step requires the openai package
     # so the environment is specified here
-    environment:
-      name: gpt3-environment
+    environment: gpt3-environment
 
   # Step 3: Generate output sequences
   - name: webapp
@@ -69,8 +65,7 @@ steps:
     # Reference the environment defined above
     # This step requires the openai package
     # so the environment is specified here
-    environment:
-      name: gpt3-environment
+    environment: gpt3-environment
 
   # Step 4: Evaluate model performance
   - name: evaluate-model
@@ -81,5 +76,4 @@ steps:
     # Reference the environment defined above
     # This step requires pandas and scikit-learn packages
     # so the environment is specified here
-    environment:
-      name: gpt3-environment
+    environment: gpt3-environment
