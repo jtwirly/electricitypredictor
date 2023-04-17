@@ -31,6 +31,9 @@ environment:
 # For more information on pipeline definitions, see:
 # https://docs.microsoft.com/en-us/azure/machine-learning/how-to-create-machine-learning-pipelines
 
+# Pipeline name
+name: gpt3-pipeline
+
 # Pipeline definition
 steps:
   # Step 1: Load and preprocess data
@@ -40,7 +43,6 @@ steps:
       dataset1: ontario_electricity_demand
     outputs:
       preprocessed_data: preprocessed_data
-    # Reference the environment defined above
     # This step requires pandas and scikit-learn packages
     # so the environment is specified here
     environment:
@@ -53,7 +55,6 @@ steps:
       preprocessed_data: preprocessed_data
     outputs:
       input_sequences: input_sequences
-    # Reference the environment defined above
     # This step requires the openai package
     # so the environment is specified here
     environment:
@@ -66,7 +67,6 @@ steps:
       input_sequences: input_sequences
     outputs:
       output_sequences: output_sequences
-    # Reference the environment defined above
     # This step requires the openai package
     # so the environment is specified here
     environment:
@@ -78,7 +78,6 @@ steps:
     inputs:
       preprocessed_data: preprocessed_data
       output_sequences: output_sequences
-    # Reference the environment defined above
     # This step requires pandas and scikit-learn packages
     # so the environment is specified here
     environment:
